@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      type="text/javascript"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+  </head>
+  <body>
+    <button
+      id="login-btn"
+      style="background-color: green; padding: 10px 20px; color: #fff"
+    >
+      Launch Embedded Signup
+    </button>
+    <script type="text/javascript">
+      window.fbAsyncInit = function () {
+        FB.init({
+          //TO DO: Add your unique Facebook app ID (All numbers).
+          appId: "1456727305161088",
+          cookie: true,
+          xfbml: true,
+          version: "v2.8",
+        });
+      };
+      document.getElementById("login-btn").onclick = () =>
+        FB.login((response) => {}, {
+          scope: "whatsapp_business_management",
+          extras: {
+            feature: "whatsapp_embedded_signup",
+            setup: {
+              solutionID: "854297306349136",
+            },
+          },
+        });
+    </script>
+  </body>
+</html>
