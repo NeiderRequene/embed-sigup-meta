@@ -10,63 +10,39 @@
     ></script> -->
   </head>
   <body>
-    <body>
-      <button
-        onclick="launchWhatsAppSignup()"
-        style="
-          background-color: #1877f2;
-          border: 0;
-          border-radius: 4px;
-          color: #fff;
-          cursor: pointer;
-          font-family: Helvetica, Arial, sans-serif;
-          font-size: 16px;
-          font-weight: bold;
-          height: 40px;
-          padding: 0 24px;
-        "
-      >
-        Sign up for WhatsApp
-      </button>
-    </body>
     <script>
       window.fbAsyncInit = function () {
-        // JavaScript SDK configuration and setup
         FB.init({
-          appId: "1456727305161088", // Meta App ID
-          cookie: true, // enable cookies
-          xfbml: true, // parse social plugins on this page
-          version: "v18.0", //Graph API version
+          appId: "1456727305161088",
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v18.0",
         });
       };
-      // Load the JavaScript SDK asynchronously
-      (function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+    <script>
       // Facebook Login with JavaScript SDK
       function launchWhatsAppSignup() {
         // Launch Facebook login
         FB.login(
           function (response) {
             if (response.authResponse) {
-              const code = response.authResponse.code;
-              // The returned code must be transmitted to your backend,
-              // which will perform a server-to-server call from there to our servers for an access token
-              9;
+              const accessToken = response.authResponse.accessToken;
+              //Use this token to call the debug_token API and get the shared WABA's ID
             } else {
               console.log("User cancelled login or did not fully authorize.");
             }
           },
           {
-            config_id: "744988294243079", // configuration ID goes here
+            config_id: "744988294243079", // configuration ID obtained in the previous step goes here
             response_type: "code", // must be set to 'code' for System User access token
-            override_default_response_type: true, // when true, any response types passed in the "response_type" will take precedence over the default types
+            override_default_response_type: true,
             extras: {
               setup: {
                 solutionID: "854297306349136",
@@ -76,11 +52,23 @@
         );
       }
     </script>
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/en_US/sdk.js"
-    ></script>
+
+    <button
+      onclick="launchWhatsAppSignup()"
+      style="
+        background-color: #1877f2;
+        border: 0;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        height: 40px;
+        padding: 0 24px;
+      "
+    >
+      Login with Facebook
+    </button>
   </body>
 </html>
