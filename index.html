@@ -34,20 +34,24 @@
           function (response) {
             console.log("response 🚩🔥", response);
             if (response.authResponse) {
-              const accessToken = response.authResponse.accessToken;
+              const accessToken = response.authResponse.code;
               console.log("accessToken 🚀✨", accessToken);
               //Use this token to call the debug_token API and get the shared WABA's ID
               fetch(
                 "https://graph.facebook.com/v18.0/debug_token?input_token=" +
                   accessToken,
                 {
+                  method: "GET",
                   headers: {
                     Authorization: "Bearer " + accessToken,
                   },
                 }
-              ).then((response) => {
-                console.log("Data 💦💛", response.json());
-              });
+              )
+                .then((response) => response.json())
+                .then((data) => console.log("Data 💦💛", data));
+              // .then((response) => {
+              //   console.log("Data 💦💛", response.json());
+              // });
             } else {
               console.log("User cancelled login or did not fully authorize.");
             }
